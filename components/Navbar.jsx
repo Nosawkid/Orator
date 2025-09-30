@@ -18,14 +18,14 @@ const Navbar = async () => {
   if (user) {
     let subscription = await prisma.UserSubscription.findFirst({
       where: {
-        kindeId: user.id,
+        kindeId: user?.id,
       },
     });
 
     if (!subscription) {
       subscription = await prisma.UserSubscription.create({
         data: {
-          kindeId: user.id,
+          kindeId: user?.id,
           isPremium: false,
         },
       });
@@ -39,7 +39,7 @@ const Navbar = async () => {
     "use server"
     await prisma.UserSubscription.update({
       where: {
-        kindeId: user.id
+        kindeId: user?.id
       },
       data:{
         isPremium:true
