@@ -7,5 +7,5 @@ export async function GET(req,{params})
     })
       if (!script) return new Response("Not found", { status: 404 })
     
-    return new Response(JSON.stringify(script),{status:200})
+     return Response.json(script)
 }
