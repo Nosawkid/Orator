@@ -2,13 +2,13 @@ import { prisma } from "@/app/utils/db";
 
 export async function GET(req, { params }) {
   let subscription = await prisma.userSubscription.findUnique({
-    where: { kindeId: await params.id },
+    where: { kindeId: await params?.id },
   });
 
   if (!subscription) {
     subscription = await prisma.userSubscription.create({
       data: {
-        kindeId: await params.id,
+        kindeId: await params?.id,
         isPremium: false, 
       },
     });

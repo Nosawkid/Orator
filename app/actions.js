@@ -22,12 +22,12 @@ export async function saveScript(formData) {
   const savedScript = await prisma.Script.create({
     data: {
       content,
-      kindeId: user.id,
+      kindeId: user?.id,
     },
   })
 
 
-  redirect(`/prompt/${savedScript.id}`)
+  redirect(`/prompt/${savedScript?.id}`)
 }
 
 
