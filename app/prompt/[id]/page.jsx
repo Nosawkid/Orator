@@ -1,12 +1,13 @@
 "use client"
-import { buttonVariants } from "@/components/ui/button";
+import { deleteScript } from "@/app/actions";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import gsap from "gsap";
 import { StepBack } from "lucide-react";
 import { Pause, Play, TextAlignCenter, TextAlignStart } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function PromptPage() {
@@ -87,13 +88,17 @@ export default function PromptPage() {
 
   fetchScript()
     },[])
+
+    const handleDelete = async()=>{
+      await deleteScript(id)
+      redirect("/")
+    }
     
 
     return (
         <section className="bg-black w-full min-h-screen">
             <div className="flex items-center justify-center gap-4 text-white px-6 py-6 text-2xl border-b border-gray-300 ">
-                                <Link href={"/"} className={buttonVariants({variant:"danger"})}>Go Back</Link>
-
+                <Button onClick={handleDelete}>Go Back</Button>
                 {isPlaying ? <Pause onClick={handlePlay} /> : <Play onClick={handlePlay} />}
                 {isPlaying && <StepBack onClick={handleReverse} />}
                 {isLeftAligned ? <TextAlignCenter onClick={handleAlignment} /> : <TextAlignStart onClick={handleAlignment} />}
